@@ -1,43 +1,104 @@
-// Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+
+//! Iteration #1: Find the maximum
+// queria fazer por iteration mas como só tem dois argumentos, fiz por if else. 
+let result1 = maxOfTwoNumbers(14, 50)
+let result2 = maxOfTwoNumbers(78, 12) 
+console.log(result1, result2)
+
+function maxOfTwoNumbers(a , b) {
+  if (a > b) {
+    return a 
+  } else if (b > a ) {
+    return b
+  }
+}
 
 
 
-// Iteration #2: Find longest word
+//! Iteration #2: Find longest word
+
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
+let result3 = findLongestWord(words) ;
+console.log(result3) ;
 
-function findLongestWord() {}
+function findLongestWord(lista) {
+  let wordsCount = []
+  lista.forEach(word => {
+    return wordsCount.push(word.length)
+  }); // pegar o length de cada palavra dentro da array e enviar pra nova array
+  let Index = wordsCount.indexOf(Math.max.apply(null, wordsCount))
+  // contar qual é o maior numero da array. 
+  // pegar o index do maior numero
+  return words[Index]
+  // retornar a palavra que tem o numero do index na array original. 
+}
 
 
+//! Iteration #3: Calculate the sum
 
-// Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
+let result4 = sumNumbers(numbers)
+console.log(result4)
 
-function sumNumbers() {}
+function sumNumbers(arr) {
+    //inicializar a variável total
+  let total = arr.reduce((currentTotal, number) => {
+    // variável total é o currentTotal + number
+    // currentTotal guarda a soma dos numeros em cada iteração
+    //usar método reduce para somar cada item da arr ao currentTotal
+    return number + currentTotal
+    // retornar um elemento da array e somar ao currentTotal
+  });
+  return total
+}
 
 
 
-// Iteration #3.1 Bonus:
-function sum() {}
+//! Iteration #3.1 Bonus:
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+// should return: 57
+
+// string should have their length added to the total
+// boolea values too  true = 1 false = 1
+
+function sum(arr) {
+  
+}
 
 
 
-// Iteration #4: Calculate the average
+//! Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+let result5 = averageNumbers(numbersAvg)
+console.log(result5)
 
-function averageNumbers() {}
-
+function averageNumbers(arr) {
+  return sumNumbers(arr) / arr.length       // reaproveitando a função de somar os elementos da array e dividindo pela quantidade de elementos achando a média. 
+}
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+let result6 = averageWordLength(wordsArr)
+console.log(result6)
 
-function averageWordLength() { }
+function averageWordLength(lista) { 
+  let wordsCount = []
+  lista.forEach(word => {
+    return wordsCount.push(word.length)
+  }); // função que da push no tamanho de cada elemento da lista para uma nova lista
+  
+  return sumNumbers(wordsCount) / wordsCount.length
+  // soma de todas as letras / quantidade de palavras
+}
+
+
 
 // Bonus - Iteration #4.1
 function avg() {}
 
-// Iteration #5: Unique arrays
+//! Iteration #5: Unique arrays
+//remove the duplicates and return a new array
 const wordsUnique = [
   'crab',
   'poison',
@@ -52,16 +113,56 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+let result7 = wordsUnique.filter(uniquifyArray)       //
+
+console.log(result7)   
+// o método filter() adiciona a nova array pelas itens que passam pelo teste da segunda função(uniquifyArray)            
+// o que a função faz: filtra a array wordsUnique e passa cada elemento dela por outra função (uniquifyArray) 
+// se o return for true, adicione o elemento na array.      
+
+//exemplos
+console.log(wordsUnique.indexOf('bring'))             // a função .indexOf("bring") retorna o numero do index do elemento que é passado por ela > 4 
+console.log(wordsUnique[4])                           // check: acessando o index 4 da lista retorna bring
+
+console.log(wordsUnique.indexOf('playground'))
+console.log(wordsUnique[6])
+
+console.log(wordsUnique.indexOf('poison'))
+console.log(wordsUnique[1])
+
+function uniquifyArray(value, index, self) {           // o que a função faz: aceita 3 argumentos. value é a 'string', index é index, self é a array que está sendo filtrada (wordsUnique)
+  return self.indexOf(value) === index;                // ou pode ser lida assim: return wordsUnique.indexOf('bring') === index 
+  // 
+}
 
 
 
-// Iteration #6: Find elements
+//! Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
+  // função recebe dois argumentos - a array com as palavras, a string com a palavra procurada
 
-function doesWordExist() {}
+let result8 = doesWordExist(wordsFind, "eating")   
+console.log(result8)
 
+//let result9 = doesWordExist(wordsFind, "karen")  
+//console.log(result9)    
 
+function doesWordExist(wordsFind, wordSearch) {  
+  //método .some() retorna true ou false 
+    
+  let exist = wordsFind.some((word => {         // word = cada elemento da lista
+    return word === wordSearch                  // compara se cada elemento da lista é igual a palavra procurada
+  }));                                          // retorna true ou false
+
+  // opicional
+  if (exist === true ) { 
+    console.log(exist, `a palavra "${wordSearch}" já existe na array.`)
+  } else if (exist === false) {
+    console.log(exist, `a palavra "${wordSearch}" não existe na array.`)
+  }
+
+  return exist 
+}
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -77,9 +178,15 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+let result10 = howManyTimes(wordsCount, 'matter')
+console.log(result10)
 
-function howManyTimes() {}
-
+function howManyTimes(words, wordSearch) {        // dois argumentos. a array com as palavras, a palavra procurada
+  let newArr = words.filter(word => {             // método filter() recebe uma função que checa se a palavra procurada é igual a cada elemento da array
+    return word === wordSearch });                // se a palavra for igual ela é adicionada a uma nova array
+  
+  return newArr.length                            // retorna o tamanho da array para saber quantas vezes a palavra foi repetida
+}
 
 
 // Iteration #8: Bonus
